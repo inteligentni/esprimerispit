@@ -1,0 +1,75 @@
+package com.sample
+ 
+import com.sample.KlimaUredjaj;
+ 
+rule "Pravilo 4"
+    when
+        k : KlimaUredjaj( kvadratura <= 50 && brojProstorija == "jedna" && snaga == 0 )
+    then
+    	k.setSnaga(9000);
+        update( k );
+end
+
+rule "Pravilo 5"
+    when
+        k : KlimaUredjaj( kvadratura <= 50 && brojProstorija == "vise" && snaga == 0 )
+    then
+    	k.setSnaga(12000);
+        update( k );
+end
+
+rule "Pravilo 6"
+    when
+        k : KlimaUredjaj( kvadratura > 50 && kvadratura < 75 && brojProstorija == "jedna" && snaga == 0 )
+    then
+    	k.setSnaga(12000);
+        update( k );
+end
+
+rule "Pravilo 7"
+    when
+        k : KlimaUredjaj( kvadratura > 50 && kvadratura < 75 && brojProstorija == "vise" && snaga == 0 )
+    then
+    	k.setSnaga(18000);
+        update( k );
+end
+
+rule "Pravilo 8"
+    when
+        k : KlimaUredjaj( kvadratura >= 75 && snaga == 0 )
+    then
+    	k.setSnaga(18000);
+        update( k );
+end
+
+rule "Pravilo 9"
+    when
+        k : KlimaUredjaj( brojProstorija == "vise" && mogucaUgradnjaNaZid == false && tip == "zidna" )
+    then
+    	k.setTip("pokretna");
+        update( k );
+end
+
+rule "Pravilo 10"
+    when
+        k : KlimaUredjaj( brojProstorija == "jedna" && mogucaUgradnjaNaZid == false && tip == "zidna" )
+    then
+    	k.setTip("prozorska");
+        update( k );
+end
+
+rule "Pravilo 11"
+    when
+        k : KlimaUredjaj( podjednakoZaGrejanje == true && imaInverter == false )
+    then
+    	k.setImaInverter(true);
+        update( k );
+end
+
+rule "Pravilo 12"
+    when
+        k : KlimaUredjaj( radNaNiskimTemperaturama == true && imaInverter == false )
+    then
+    	k.setImaInverter(true);
+        update( k );
+end
